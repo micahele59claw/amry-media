@@ -90,23 +90,48 @@
             top: 0; left: 0; right: 0; bottom: 0;
             z-index: 0;
             overflow: hidden;
+            background: linear-gradient(45deg, #1a1a1a, #2d1f3d, #1a1a1a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
         }
         
-        .hero-video video {
-            min-width: 100%;
-            min-height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
-        .hero-video-overlay {
+        .hero-particles {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(18,18,18,0.85) 0%, rgba(45,31,61,0.75) 50%, rgba(18,18,18,0.85) 100%);
+            overflow: hidden;
             z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 45, 85, 0.3);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+        
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 25s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 20s; background: rgba(131, 58, 180, 0.3); }
+        .particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 22s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 6s; animation-duration: 18s; background: rgba(252, 175, 69, 0.3); }
+        .particle:nth-child(5) { left: 50%; animation-delay: 8s; animation-duration: 24s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 10s; animation-duration: 21s; background: rgba(131, 58, 180, 0.3); }
+        .particle:nth-child(7) { left: 70%; animation-delay: 12s; animation-duration: 19s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 14s; animation-duration: 23s; background: rgba(252, 175, 69, 0.3); }
+        .particle:nth-child(9) { left: 90%; animation-delay: 16s; animation-duration: 20s; }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
         }
         
         .carousel-slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=1920&q=80'); }
@@ -600,12 +625,18 @@
 
     <section class="hero">
         <div class="hero-video">
-            <!-- Free stock video from Pexels - Social Media/Tech theme -->
-            <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=1920&q=80">
-                <source src="https://videos.pexels.com/video-files/3129671/3129671-hd_1920_1080_25fps.mp4" type="video/mp4">
-            </video>
+            <div class="hero-particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
         </div>
-        <div class="hero-video-overlay"></div>
         <div class="hero-content">
             <h1>Grow Your Brand with <span>Social Media</span></h1>
             <p>We help businesses and creators build powerful social media presences that drive engagement, followers, and real results.</p>
