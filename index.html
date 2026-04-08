@@ -103,7 +103,30 @@
         }
         
         .carousel-slide.active {
-            opacity: 0.15;
+            opacity: 0.3;
+        }
+        
+        .carousel-indicators {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .carousel-indicator.active {
+            background: #FF2D55;
         }
         
         .carousel-slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=1920&q=80'); }
@@ -602,6 +625,12 @@
             <div class="carousel-slide"></div>
             <div class="carousel-slide"></div>
         </div>
+        <div class="carousel-indicators">
+            <div class="carousel-indicator active" data-slide="0"></div>
+            <div class="carousel-indicator" data-slide="1"></div>
+            <div class="carousel-indicator" data-slide="2"></div>
+            <div class="carousel-indicator" data-slide="3"></div>
+        </div>
         <div class="hero-content">
             <h1>Grow Your Brand with <span>Social Media</span></h1>
             <p>We help businesses and creators build powerful social media presences that drive engagement, followers, and real results.</p>
@@ -775,15 +804,30 @@
 <script>
         // Carousel animation
         const slides = document.querySelectorAll('.carousel-slide');
+        const indicators = document.querySelectorAll('.carousel-indicator');
         let currentSlide = 0;
         
-        function nextSlide() {
+        function goToSlide(index) {
             slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
+            indicators[currentSlide].classList.remove('active');
+            currentSlide = index;
             slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
         }
         
-        setInterval(nextSlide, 4000); // Change slide every 4 seconds
+        function nextSlide() {
+            goToSlide((currentSlide + 1) % slides.length);
+        }
+        
+        // Click on indicators to switch slides
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => goToSlide(index));
+        });
+        
+        // Auto-advance every 4 seconds
+        setInterval(nextSlide, 4000);
+        
+        console.log('Carousel initialized with', slides.length, 'slides');
     </script>
 </body>
 </html>
