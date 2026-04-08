@@ -82,56 +82,27 @@
             text-align: center;
             padding: 100px 50px;
             position: relative;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d1f3d 50%, #1a1a1a 100%);
+            overflow: hidden;
         }
         
-        .hero-video {
+        .hero-carousel {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             z-index: 0;
-            overflow: hidden;
-            background: linear-gradient(45deg, #1a1a1a, #2d1f3d, #1a1a1a);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
         }
         
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .hero-particles {
+        .carousel-slide {
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            overflow: hidden;
-            z-index: 1;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
         }
         
-        .particle {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: rgba(255, 45, 85, 0.3);
-            border-radius: 50%;
-            animation: float 20s infinite;
-        }
-        
-        .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 25s; }
-        .particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 20s; background: rgba(131, 58, 180, 0.3); }
-        .particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 22s; }
-        .particle:nth-child(4) { left: 40%; animation-delay: 6s; animation-duration: 18s; background: rgba(252, 175, 69, 0.3); }
-        .particle:nth-child(5) { left: 50%; animation-delay: 8s; animation-duration: 24s; }
-        .particle:nth-child(6) { left: 60%; animation-delay: 10s; animation-duration: 21s; background: rgba(131, 58, 180, 0.3); }
-        .particle:nth-child(7) { left: 70%; animation-delay: 12s; animation-duration: 19s; }
-        .particle:nth-child(8) { left: 80%; animation-delay: 14s; animation-duration: 23s; background: rgba(252, 175, 69, 0.3); }
-        .particle:nth-child(9) { left: 90%; animation-delay: 16s; animation-duration: 20s; }
-        
-        @keyframes float {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+        .carousel-slide.active {
+            opacity: 1;
         }
         
         .carousel-slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=1920&q=80'); }
@@ -139,17 +110,16 @@
         .carousel-slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1563986768494-4dee276338f9?w=1920&q=80'); }
         .carousel-slide:nth-child(4) { background-image: url('https://images.unsplash.com/photo-1557804506-669a67965ba6?w=1920&q=80'); }
         
-        .hero::before {
-            content: "";
+        .hero-overlay {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(26,26,26,0.8) 0%, rgba(45,31,61,0.7) 50%, rgba(26,26,26,0.8) 100%);
+            background: linear-gradient(135deg, rgba(18,18,18,0.85) 0%, rgba(45,31,61,0.9) 50%, rgba(18,18,18,0.85) 100%);
             z-index: 1;
         }
         
         .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
             max-width: 900px;
         }
         
@@ -350,24 +320,12 @@
             margin-bottom: 20px;
         }
         
-        .about-image {
-            position: relative;
-        }
-        
         .about-image img {
             width: 100%;
             height: 400px;
             object-fit: cover;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-        
-        .hero-bg {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: url('https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=1920&q=80') center/cover;
-            opacity: 0.15;
-            z-index: 0;
         }
         
         /* Pricing Section */
@@ -498,97 +456,6 @@
         }
         
         /* Footer */
-        /* Work/Portfolio Section */
-        .portfolio {
-            padding: 100px 50px;
-            background: linear-gradient(180deg, #0f0f0f 0%, var(--dark) 100%);
-        }
-        
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .portfolio-item {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            height: 250px;
-        }
-        
-        .portfolio-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .portfolio-item:hover img {
-            transform: scale(1.1);
-        }
-        
-        .portfolio-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(45deg, rgba(255,45,85,0.9), rgba(131,58,180,0.9));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .portfolio-item:hover .portfolio-overlay {
-            opacity: 1;
-        }
-        
-        .portfolio-overlay span {
-            color: white;
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-        
-        /* Stats Bar */
-        .stats-bar {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            padding: 60px 50px;
-            text-align: center;
-        }
-        
-        .stats-bar h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-        }
-        
-        .stats-grid {
-            display: flex;
-            justify-content: center;
-            gap: 80px;
-            flex-wrap: wrap;
-        }
-        
-        .stat-item {
-            text-align: center;
-        }
-        
-        .stat-item .number {
-            font-family: 'Poppins', sans-serif;
-            font-size: 4rem;
-            font-weight: 900;
-            color: white;
-        }
-        
-        .stat-item .label {
-            font-size: 1rem;
-            opacity: 0.9;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
         footer {
             padding: 40px 50px;
             background: #0a0a0a;
@@ -624,19 +491,13 @@
     </nav>
 
     <section class="hero">
-        <div class="hero-video">
-            <div class="hero-particles">
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-            </div>
+        <div class="hero-carousel">
+            <div class="carousel-slide active"></div>
+            <div class="carousel-slide"></div>
+            <div class="carousel-slide"></div>
+            <div class="carousel-slide"></div>
         </div>
+        <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1>Grow Your Brand with <span>Social Media</span></h1>
             <p>We help businesses and creators build powerful social media presences that drive engagement, followers, and real results.</p>
@@ -708,29 +569,6 @@
         </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section class="portfolio">
-        <h2 class="section-title">Our <span>Work</span></h2>
-        <div class="portfolio-grid">
-            <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=600&q=80" alt="Social Media Campaign">
-                <div class="portfolio-overlay"><span>Social Campaigns</span></div>
-            </div>
-            <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="Analytics Dashboard">
-                <div class="portfolio-overlay"><span>Analytics & Growth</span></div>
-            </div>
-            <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1563986768494-4dee276338f9?w=600&q=80" alt="Content Creation">
-                <div class="portfolio-overlay"><span>Content Creation</span></div>
-            </div>
-            <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1557804506-669a67965ba6?w=600&q=80" alt="Team Collaboration">
-                <div class="portfolio-overlay"><span>Brand Strategy</span></div>
-            </div>
-        </div>
-    </section>
-
     <section class="about" id="about">
         <div class="about-content">
             <div class="about-text">
@@ -741,9 +579,6 @@
             </div>
             <div class="about-image">
                 <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80" alt="Amry Media Team">
-                <div style="position:absolute;bottom:20px;left:20px;background:rgba(0,0,0,0.7);padding:15px 25px;border-radius:10px;">
-                    <span style="color:#fff;font-weight:600;">Building brands that matter</span>
-                </div>
             </div>
         </div>
     </section>
@@ -807,5 +642,19 @@
     <footer>
         <p>© 2026 Amry Media. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Image carousel - changes every 4 seconds
+        const slides = document.querySelectorAll('.carousel-slide');
+        let currentSlide = 0;
+        
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        setInterval(nextSlide, 4000);
+    </script>
 </body>
 </html>
